@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Girasol Para Abi <3 </title>
+    <style>
+        body {
+            background-color: rgb(247, 71, 209);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        canvas {
+            border: 0px solid white;
+            background-color: rgb(247, 71, 209);
+        }
+
+        h1 {
+            color: white;
+            text-align: center;
+            position: absolute;
+            top: 20px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Feliz día de la primavera, no te lo puedo dar pero soy una crack que sabe programar</h1>
+    <canvas id="sunflowerCanvas" width="500" height="500"></canvas>
+
+    <script>
+        const canvas = document.getElementById('sunflowerCanvas');
+        const ctx = canvas.getContext('2d');
+
+        function drawPetal(x, y, radiusX, radiusY, angle, fillColor) {
+            ctx.beginPath();
+            ctx.ellipse(x, y, radiusX, radiusY, angle, 0, Math.PI * 2);
+            ctx.fillStyle = fillColor;
+            ctx.fill();
+            ctx.closePath();
+        }
+
+        function drawSunflower() {
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            const petalCount = 20;  // Aumentamos el número de pétalos
+            const petalRadiusX = 80;  // Radio horizontal del pétalo (más largo)
+            const petalRadiusY = 30;  // Radio vertical del pétalo (más estrecho)
+            const petalColor = '#f9d71c';  // Amarillo típico del girasol
+
+            // Dibujar los pétalos
+            for (let i = 0; i < petalCount; i++) {
+                const angle = (i * 2 * Math.PI) / petalCount;
+                const x = centerX + Math.cos(angle) * 120;
+                const y = centerY + Math.sin(angle) * 120;
+                drawPetal(x, y, petalRadiusX, petalRadiusY, angle, petalColor);
+            }
+
+            // Dibujar el centro del girasol (café oscuro)
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, 60, 0, Math.PI * 2);
+            ctx.fillStyle = '#6b4226';  // Café oscuro
+            ctx.fill();
+            ctx.closePath();
+
+            // Añadir detalles (pequeñas líneas en el centro)
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, 40, 0, Math.PI * 2);
+            ctx.strokeStyle = '#3e2b1f';  // Café más oscuro
+            ctx.lineWidth = 8;
+            ctx.stroke();
+            ctx.closePath();
+        }
+
+        // Dibujar el girasol
+        drawSunflower();
+    </script>
+</body>
+</html>
